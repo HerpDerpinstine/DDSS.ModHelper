@@ -99,8 +99,9 @@ namespace DDSS_ModHelper.Settings.Internal
             _categoryCache.Clear();
             _settingCache.Clear();
             int childCount = ModSettingsManager._tab.settingsParent.childCount;
-            for (int i = 0; i < childCount; i++)
-                GameObject.Destroy(ModSettingsManager._tab.settingsParent.GetChild(i).gameObject);
+            if (childCount > 0)
+                for (int i = 0; i < childCount; i++)
+                    GameObject.Destroy(ModSettingsManager._tab.settingsParent.GetChild(i).gameObject);
 
             // Add New Listings
             foreach (MelonPreferences_Category melonCat in MelonPreferences.Categories)

@@ -32,8 +32,10 @@ namespace DDSS_ModHelper.Patches
                 yield return null;
 
             // Destroy All Old Listings
-            foreach (Transform obj in __instance.lobbyListContent)
-                Object.Destroy(obj.gameObject);
+            int childCount = __instance.lobbyListContent.childCount;
+            if (childCount > 0)
+                for (int i = 0; i < childCount; i++)
+                    GameObject.Destroy(__instance.lobbyListContent.GetChild(i).gameObject);
 
             // Process through Lobbies Found
             uint lobbyCount = SteamLobby.instance.lobbyList.m_nLobbiesMatching;
