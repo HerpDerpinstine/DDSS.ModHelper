@@ -28,7 +28,7 @@ namespace DDSS_ModHelper
             ApplyPatch<Patch_ConsoleController>();
             ApplyPatch<Patch_KeyBindingObject>();
             ApplyPatch<Patch_LobbyBrowserTab>();
-            ApplyPatch<Patch_LocalizedText>();
+            ApplyPatch<Patch_LocalizationManager>();
             ApplyPatch<Patch_NetworkIdentity>();
             ApplyPatch<Patch_SettingObject>();
             ApplyPatch<Patch_SettingsManager>();

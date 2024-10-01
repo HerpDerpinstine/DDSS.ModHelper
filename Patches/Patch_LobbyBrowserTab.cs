@@ -1,7 +1,9 @@
 ﻿using DDSS_ModHelper.Utils;
 using HarmonyLib;
 using Il2Cpp;
+using Il2CppLocalization;
 using Il2CppSteamworks;
+using Il2CppTMPro;
 using System.Collections;
 using UnityEngine;
 
@@ -15,6 +17,21 @@ namespace DDSS_ModHelper.Patches
         {
             // Apply Grid Layout Height
             __instance.SetGridlayoutHeight();
+
+            // Get Header Text
+            Transform titleTrans = __instance.transform.Find("Tab/LobbyList/TopBar/Title");
+            if (titleTrans != null)
+            {
+                // Apply Header Text
+                TextMeshProUGUI titleText = titleTrans.GetComponentInChildren<TextMeshProUGUI>();
+                if (titleText != null)
+                    titleText.text = "Modded Lobby Browser";
+
+                // Remove Localization
+                LocalizedText localized = titleTrans.GetComponentInChildren<LocalizedText>();
+                if (localized != null)
+                    UnityEngine.Object.Destroy(localized);
+            }
 
             // Run new Coroutine
             __instance.StartCoroutine(UpdateLobbyList(__instance));

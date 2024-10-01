@@ -1,4 +1,5 @@
 ﻿using DDSS_ModHelper.Components;
+using Il2Cpp;
 using System;
 using System.Collections;
 using System.Text.RegularExpressions;
@@ -43,5 +44,15 @@ namespace DDSS_ModHelper.Utils
         public static void RemoveListener<T>(this UnityEvent<T> action,
             Action<T> listener)
             => action.RemoveListener(listener);
+
+        public static SettingAlternative FindAlternativeByKey(this Setting setting, string key)
+        {
+            if (setting.alternatives == null)
+                return null;
+            foreach (var alternative in setting.alternatives)
+                if (alternative.key == key)
+                    return alternative;
+            return null;
+        }
     }
 }

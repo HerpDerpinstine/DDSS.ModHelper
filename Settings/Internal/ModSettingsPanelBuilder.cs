@@ -35,6 +35,16 @@ namespace DDSS_ModHelper.Settings.Internal
                 tab.scrollRect.verticalScrollbar.value = 1f;
                 tab.scrollRect.SetDirty();
 
+                // Move and Stretch Scroll View
+                Vector2 scrollViewOffset = tab.scrollRect.rectTransform.offsetMax;
+                scrollViewOffset.y += 46f;
+                tab.scrollRect.rectTransform.offsetMax = scrollViewOffset;
+
+                // Move and Stretch Viewport
+                Vector2 viewportOffset = tab.scrollRect.viewRect.offsetMax;
+                viewportOffset.y += 44f;
+                tab.scrollRect.viewRect.offsetMax = viewportOffset;
+
                 // Change Original Title
                 Transform titleTrans = comp.transform.Find("Tab/Tasks/TopBar/Title");
                 if (titleTrans != null)
@@ -57,6 +67,21 @@ namespace DDSS_ModHelper.Settings.Internal
                     LocalizedText localized = cloneTitleTrans.GetComponentInChildren<LocalizedText>();
                     if (localized != null)
                         UnityEngine.Object.Destroy(localized);
+                }
+
+                // Remove Extra Categories Buttons
+                Transform categoriesGrid = _settingsTabObj.transform.Find("Tab/Tasks/CatagoriesGrid");
+                if (categoriesGrid != null)
+                    GameObject.Destroy(categoriesGrid.gameObject);
+
+                // Move and Stretch Scroll View Background
+                Transform backgroundTrans = _settingsTabObj.transform.Find("Tab/Tasks/Background");
+                if (cloneTitleTrans != null)
+                {
+                    RectTransform rectTrans = backgroundTrans.GetComponent<RectTransform>();
+                    Vector2 rectOffset = rectTrans.offsetMax;
+                    rectOffset.y += 44f;
+                    rectTrans.offsetMax = rectOffset;
                 }
 
                 break;

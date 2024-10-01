@@ -1,4 +1,5 @@
 ﻿using Il2Cpp;
+using Il2CppLocalization;
 using Il2CppUI.Tabs.SettingsTab;
 using System;
 using UnityEngine;
@@ -16,6 +17,11 @@ namespace DDSS_ModHelper.Settings.Internal
                 ModSettingsManager._tab.settingsParent);
             SettingObject settingObj = obj.GetComponent<SettingObject>();
             settingObj.SetSetting(setting, GameSettingsManager.instance, true, true);
+
+            LocalizedText localizedText = obj.GetComponent<LocalizedText>();
+            if (localizedText != null)
+                GameObject.Destroy(localizedText);
+
             return settingObj;
         }
 
@@ -25,6 +31,7 @@ namespace DDSS_ModHelper.Settings.Internal
         {
             Setting setting = new();
             setting.devOnly = false;
+            setting.label = name;
             setting.Key = name;
             setting.presetName = string.Empty;
             setting.type = type;
@@ -49,8 +56,8 @@ namespace DDSS_ModHelper.Settings.Internal
         {
             Setting setting = CreateSetting(name, description);
             setting.alternatives = new();
-            setting.alternatives.Add("OFF");
-            setting.alternatives.Add("ON");
+            setting.alternatives.Add(new("OFF", "OFF"));
+            setting.alternatives.Add(new("ON", "ON"));
             setting.Value = value ? 1f : 0f;
             return CreateObject(setting);
         }
@@ -66,9 +73,9 @@ namespace DDSS_ModHelper.Settings.Internal
             Setting setting = CreateSetting(name, description);
             setting.axisName = "MODDED";
             setting.alternatives = new();
-            setting.alternatives.Add(typeof(float).FullName);
-            setting.alternatives.Add(minValue.ToString());
-            setting.alternatives.Add(maxValue.ToString());
+            setting.alternatives.Add(new(typeof(float).FullName, typeof(float).FullName));
+            setting.alternatives.Add(new(minValue.ToString(), minValue.ToString()));
+            setting.alternatives.Add(new(maxValue.ToString(), maxValue.ToString()));
 
             if (typeof(T) == typeof(float))
                 setting.Value = (float)Math.Round(Convert.ToDouble(value), 1, MidpointRounding.AwayFromZero);
@@ -88,7 +95,7 @@ namespace DDSS_ModHelper.Settings.Internal
 
             string[] valueNames = Enum.GetNames(enumType);
             foreach (string valueName in valueNames)
-                setting.alternatives.Add(valueName);
+                setting.alternatives.Add(new(valueName, valueName));
 
             int valueIndex = 0;
             Array allValues = Enum.GetValues(enumType);

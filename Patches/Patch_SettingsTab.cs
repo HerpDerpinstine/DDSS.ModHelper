@@ -30,6 +30,18 @@ namespace DDSS_ModHelper.Patches
         }
 
         [HarmonyPrefix]
+        [HarmonyPatch(typeof(SettingsTab), nameof(SettingsTab.ShowCategories))]
+        private static bool ShowCategories_Prefix(SettingsTab __instance)
+        {
+            // Check for Mod Settings Tab
+            if (__instance != ModSettingsManager._tab)
+                return true;
+
+            // Prevent Original
+            return false;
+        }
+
+        [HarmonyPrefix]
         [HarmonyPatch(typeof(SettingsTab), nameof(SettingsTab.ApplyAllSettings))]
         private static bool ApplyAllSettings_Prefix(SettingsTab __instance)
         {

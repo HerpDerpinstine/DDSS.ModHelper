@@ -1,5 +1,6 @@
 ﻿using DDSS_ModHelper.Settings;
 using DDSS_ModHelper.Settings.Internal;
+using DDSS_ModHelper.Utils;
 using HarmonyLib;
 using Il2Cpp;
 using Il2CppUI.Tabs.SettingsTab;
@@ -48,8 +49,8 @@ namespace DDSS_ModHelper.Patches
                     entry.GetReflectedType(),
                     __0,
                     __instance.setting.Value,
-                    __instance.setting.alternatives[1],
-                    __instance.setting.alternatives[2]);
+                    __instance.setting.alternatives[1].key,
+                    __instance.setting.alternatives[2].key);
             __instance.UpdateMultiChoice();
 
             // Prevent Original
@@ -80,15 +81,17 @@ namespace DDSS_ModHelper.Patches
             if (__0.Key == "Max players")
             {
                 // Change Max Value to 99
-                __0.alternatives[1] = "99";
+                __0.alternatives[1].key = "99";
+                __0.alternatives[1].label = "99";
             }
 
             // Check for Frame Rate
             if (__0.Key == "Frame Rate")
             {
                 // Add Unlimited Frame Rate
-                if (!__0.alternatives.Contains("Unlimited"))
-                    __0.alternatives.Add("Unlimited");
+                SettingAlternative alt = __0.FindAlternativeByKey("Unlimited");
+                if (alt == null)
+                    __0.alternatives.Add(new("Unlimited", "Unlimited"));
             }
         }
 
