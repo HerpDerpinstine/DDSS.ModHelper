@@ -13,8 +13,6 @@ Custom Modding API for [Dale & Dawson Stationery Supplies](https://store.steampo
 | Unlimited Frame Rate |
 | 100 Max Players |
 | Intro Skip |
-| Security Patches |
-| General Bugfixes |
 
 ---
 
@@ -35,6 +33,6 @@ Custom Modding API for [Dale & Dawson Stationery Supplies](https://store.steampo
 
 ### LICENSING & CREDITS:
 
-DDSS.ModHelper is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/HerpDerpinstine/DDSS.ModHelper/blob/master/LICENSE.md) for the full License.
+DDSS.ModHelper is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/HerpDerpinstine/DDSS.ModHelper/blob/main/LICENSE.md) for the full License.
 
 DDSS.ModHelper is not affiliated with Striped Panda Studios or [Dale & Dawson Stationery Supplies](https://store.steampowered.com/app/2920570/Dale__Dawson_Stationery_Supplies/) in any way.

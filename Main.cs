@@ -26,14 +26,10 @@ namespace DDSS_ModHelper
             // Apply Patches
             ApplyPatch<Patch_CheatManager>();
             ApplyPatch<Patch_ConsoleController>();
-            ApplyPatch<Patch_GameManager>();
             ApplyPatch<Patch_KeyBindingObject>();
             ApplyPatch<Patch_LobbyBrowserTab>();
-            ApplyPatch<Patch_LobbyManager>();
-            ApplyPatch<Patch_LobbyPlayer>();
             ApplyPatch<Patch_LocalizedText>();
             ApplyPatch<Patch_NetworkIdentity>();
-            ApplyPatch<Patch_PhoneManager>();
             ApplyPatch<Patch_SettingObject>();
             ApplyPatch<Patch_SettingsManager>();
             ApplyPatch<Patch_SettingsTab>();
