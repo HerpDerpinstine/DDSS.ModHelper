@@ -43,10 +43,10 @@ namespace DDSS_ModHelper.Patches
             }
 
             // Get List of Players
-            int playerCount = LobbyManager.instance.connectedPlayers.Count;
+            int playerCount = LobbyManager.instance.connectedLobbyPlayers.Count;
             Il2CppSystem.Collections.Generic.List<NetworkIdentity> playerList = new();
             NetworkIdentity playerManager = null;
-            foreach (NetworkIdentity player in LobbyManager.instance.connectedPlayers)
+            foreach (NetworkIdentity player in LobbyManager.instance.connectedLobbyPlayers)
             {
                 // Validate Lobby Player
                 LobbyPlayer lobbyPlayer = player.GetComponent<LobbyPlayer>();
