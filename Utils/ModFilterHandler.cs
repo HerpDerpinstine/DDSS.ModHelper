@@ -9,7 +9,7 @@ namespace DDSS_ModHelper.Utils
     {
         private static List<MelonBase> _optionalMelons = new();
 
-        public static void AddOptionalMelon<T>(T melon) where T : MelonBase
+        public static void AddOptionalMelon(MelonBase melon)
         {
             if (!_optionalMelons.Contains(melon))
                 _optionalMelons.Add(melon);
