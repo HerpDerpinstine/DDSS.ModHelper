@@ -101,6 +101,13 @@ namespace DDSS_ModHelper.Console
                 || string.IsNullOrWhiteSpace(fullCmd))
                 return;
 
+            fullCmd = fullCmd.RemoveRichText();
+            if (string.IsNullOrEmpty(fullCmd)
+                || string.IsNullOrWhiteSpace(fullCmd))
+                return;
+
+            PrintCommand(fullCmd);
+
             if (_cmdHistory.Count >= MAX_COMMAND_HISTORY)
                 while (_cmdHistory.Count >= MAX_COMMAND_HISTORY)
                     _cmdHistory.RemoveAt(0);
@@ -138,14 +145,27 @@ namespace DDSS_ModHelper.Console
                 || string.IsNullOrWhiteSpace(cmd))
                 return;
 
+            cmd = cmd.RemoveRichText();
+            if (string.IsNullOrEmpty(cmd)
+                || string.IsNullOrWhiteSpace(cmd))
+                return;
+
+            PrintCommand($"{cmd} {string.Join(' ', args)}");
+
             if (!_cmds.TryGetValue(cmd, out ConsoleCommand command))
             {
                 PrintError($"Command not found: {cmd}");
                 return;
             }
 
-            PrintMsg($"{cmd} {string.Join(' ', args)}");
             command.Execute(args);
+        }
+
+        private static void PrintCommand(string fullCmd)
+        {
+            MelonMain._logger.Msg($"[CONSOLE]: {fullCmd}");
+            _consoleHistory = _consoleHistory + "] " + fullCmd + "\n";
+            ApplyConsoleTextToObject();
         }
 
         public static void PrintMsg(string txt)
