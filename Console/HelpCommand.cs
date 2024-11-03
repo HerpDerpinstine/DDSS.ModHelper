@@ -1,6 +1,6 @@
 ﻿namespace DDSS_ModHelper.Console
 {
-    public class HelpCommand : ConsoleCommand
+    internal class HelpCommand : ConsoleCommand
     {
         public override string GetName()
             => "help";

@@ -1,6 +1,6 @@
 ﻿namespace DDSS_ModHelper.Console
 {
-    public class ClearCommand : ConsoleCommand
+    internal class ClearCommand : ConsoleCommand
     {
         public override string GetName()
             => "clear";
