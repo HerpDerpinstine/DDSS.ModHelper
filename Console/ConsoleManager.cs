@@ -16,6 +16,8 @@ namespace DDSS_ModHelper.Console
 
         private const int MAX_COMMAND_HISTORY = 100;
 
+        //private const int MAX_CONSOLE_LINES = 10;
+
         internal static void OnSceneInit()
         {
             ConsoleController[] comps = Resources.FindObjectsOfTypeAll<ConsoleController>();
@@ -51,8 +53,28 @@ namespace DDSS_ModHelper.Console
             }
         }
 
+        /*
+        private static void EnsureConsoleTextLength()
+        {
+            string[] array = _consoleHistory.Split('\n', StringSplitOptions.None);
+            if (array.Length <= MAX_CONSOLE_LINES)
+                return;
+
+            _consoleHistory = string.Empty;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (i == array.Length - 1)
+                    _consoleHistory += array[i];
+                else
+                    _consoleHistory = _consoleHistory + array[i] + "\n";
+            }
+        }
+        */
+
         internal static void ApplyConsoleTextToObject()
         {
+            EnsureConsoleTextLength();
+
             if ((ConsoleController.instance == null)
                 || ConsoleController.instance.WasCollected
                 || (ConsoleController.instance.console == null)
