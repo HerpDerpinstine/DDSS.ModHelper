@@ -5,8 +5,16 @@ using System.Collections.Generic;
 
 namespace DDSS_ModHelper.Utils
 {
-    internal static class ModFilterHandler
+    public static class ModFilterHandler
     {
+        private static List<MelonBase> _optionalMelons = new();
+
+        public static void AddOptionalMelon<T>(T melon) where T : MelonBase
+        {
+            if (!_optionalMelons.Contains(melon))
+                _optionalMelons.Add(melon);
+        }
+
         [Serializable]
         internal class SerializedMod
         {
@@ -32,18 +40,20 @@ namespace DDSS_ModHelper.Utils
             List<SerializedMod> serializedMods = new();
 
             foreach (var plugin in MelonPlugin.RegisteredMelons)
-                serializedMods.Add(new(string.IsNullOrEmpty(plugin.ID)
-                    ? plugin.Info.Name : plugin.ID,
-                    plugin.Info.Name,
-                    plugin.Info.Author,
-                    plugin.Info.Version));
+                if (!_optionalMelons.Contains(plugin))
+                    serializedMods.Add(new(string.IsNullOrEmpty(plugin.ID)
+                        ? plugin.Info.Name : plugin.ID,
+                        plugin.Info.Name,
+                        plugin.Info.Author,
+                        plugin.Info.Version));
 
             foreach (var mod in MelonMod.RegisteredMelons)
-                serializedMods.Add(new(string.IsNullOrEmpty(mod.ID)
-                    ? mod.Info.Name : mod.ID,
-                    mod.Info.Name,
-                    mod.Info.Author,
-                    mod.Info.Version));
+                if (!_optionalMelons.Contains(mod))
+                    serializedMods.Add(new(string.IsNullOrEmpty(mod.ID)
+                        ? mod.Info.Name : mod.ID,
+                        mod.Info.Name,
+                        mod.Info.Author,
+                        mod.Info.Version));
 
             return JsonConvert.SerializeObject(serializedMods);
         }
