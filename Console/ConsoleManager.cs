@@ -150,6 +150,15 @@ namespace DDSS_ModHelper.Console
 
         public static void PrintMsg(string txt)
         {
+            if (string.IsNullOrEmpty(txt)
+                || string.IsNullOrWhiteSpace(txt))
+                return;
+
+            txt = txt.RemoveRichText();
+            if (string.IsNullOrEmpty(txt)
+                || string.IsNullOrWhiteSpace(txt))
+                return;
+
             MelonMain._logger.Msg($"[CONSOLE]: {txt}");
             _consoleHistory = _consoleHistory + txt + "\n";
             ApplyConsoleTextToObject();
@@ -157,6 +166,15 @@ namespace DDSS_ModHelper.Console
 
         public static void PrintMsg(Color color, string txt)
         {
+            if (string.IsNullOrEmpty(txt)
+                || string.IsNullOrWhiteSpace(txt))
+                return;
+
+            txt = txt.RemoveRichText();
+            if (string.IsNullOrEmpty(txt)
+                || string.IsNullOrWhiteSpace(txt))
+                return;
+
             MelonMain._logger.Msg(color.ToDrawingColor(), $"[CONSOLE]: {txt}");
             _consoleHistory = _consoleHistory + "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">" + txt + "</color>\n";
             ApplyConsoleTextToObject();
@@ -164,8 +182,17 @@ namespace DDSS_ModHelper.Console
 
         public static void PrintError(string txt)
         {
+            if (string.IsNullOrEmpty(txt)
+                || string.IsNullOrWhiteSpace(txt))
+                return;
+
+            txt = txt.RemoveRichText();
+            if (string.IsNullOrEmpty(txt)
+                || string.IsNullOrWhiteSpace(txt))
+                return;
+
             MelonMain._logger.Error($"[CONSOLE]: {txt}");
-            _consoleHistory = _consoleHistory + "Error : <color=red>" + txt + "</color>\n";
+            _consoleHistory = _consoleHistory + "<color=red>Error:" + txt + "</color>\n";
             ApplyConsoleTextToObject();
         }
     }
