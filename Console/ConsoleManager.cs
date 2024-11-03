@@ -73,7 +73,7 @@ namespace DDSS_ModHelper.Console
 
         internal static void ApplyConsoleTextToObject()
         {
-            EnsureConsoleTextLength();
+            //EnsureConsoleTextLength();
 
             if ((ConsoleController.instance == null)
                 || ConsoleController.instance.WasCollected
