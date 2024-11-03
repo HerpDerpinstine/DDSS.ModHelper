@@ -192,7 +192,7 @@ namespace DDSS_ModHelper.Console
                 return;
 
             MelonMain._logger.Error($"[CONSOLE]: {txt}");
-            _consoleHistory = _consoleHistory + "<color=red>Error:" + txt + "</color>\n";
+            _consoleHistory = _consoleHistory + "<color=red>Error: " + txt + "</color>\n";
             ApplyConsoleTextToObject();
         }
     }
