@@ -3,6 +3,7 @@ using Il2CppDefaultNamespace;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_SettingsManager
     {
         [HarmonyPostfix]

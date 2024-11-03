@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_LobbyBrowserTab
     {
         [HarmonyPrefix]

@@ -13,12 +13,14 @@ using UnityEngine;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_StartGameState
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(StartGameState), nameof(StartGameState.Enter))]
         private static bool Enter_Prefix(StartGameState __instance)
-        {// Check if Server
+        {
+            // Check if Server
             if (!__instance.gameManager.isServer)
                 return false;
 

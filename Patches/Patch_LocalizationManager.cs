@@ -4,6 +4,7 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_LocalizationManager
     {
         [HarmonyPrefix]

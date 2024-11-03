@@ -3,14 +3,17 @@ using DDSS_ModHelper.Console;
 using DDSS_ModHelper.Patches;
 using DDSS_ModHelper.Settings;
 using DDSS_ModHelper.Utils;
+using HarmonyLib;
 using MelonLoader;
 using System;
+using System.Reflection;
 
 namespace DDSS_ModHelper
 {
     internal class MelonMain : MelonMod
     {
         internal static MelonLogger.Instance _logger;
+        internal static bool _errorOccured;
 
         public override void OnInitializeMelon()
         {
@@ -21,33 +24,51 @@ namespace DDSS_ModHelper
             ConfigHandler.Setup();
 
             // Register Custom Types
+            CustomConsoleHandler.Register();
             ManagedEnumerator.Register();
 
             // Apply Patches
-            ApplyPatch<Patch_CheatManager>();
-            ApplyPatch<Patch_ConsoleController>();
-            ApplyPatch<Patch_KeyBindingObject>();
-            ApplyPatch<Patch_LobbyBrowserTab>();
-            ApplyPatch<Patch_LocalizationManager>();
-            ApplyPatch<Patch_NetworkIdentity>();
-            ApplyPatch<Patch_SettingObject>();
-            ApplyPatch<Patch_SettingsManager>();
-            ApplyPatch<Patch_SettingsTab>();
-            ApplyPatch<Patch_StartGameState>();
-            ApplyPatch<Patch_SteamLobby>();
-            ApplyPatch<Patch_SteamMatchmaking>();
-            ApplyPatch<Patch_UIManager>();
-            ApplyPatch<Patch_VersionCheck>();
+            ApplyPatches();
+
+            // Create Default Commands
+            ConsoleManager.AddCommand<HelpCommand>();
+            ConsoleManager.AddCommand<ClearCommand>();
 
             // Log Success
             _logger.Msg("Initialized!");
         }
 
+        private void ApplyPatches()
+        {
+            Assembly melonAssembly = typeof(MelonMain).Assembly;
+            foreach (Type type in melonAssembly.GetValidTypes())
+            {
+                // Check Type for any Harmony Attribute
+                if (type.GetCustomAttribute<HarmonyPatch>() == null)
+                    continue;
+
+                // Apply
+                try
+                {
+                    if (MelonDebug.IsEnabled())
+                        LoggerInstance.Msg($"Applying {type.Name}");
+
+                    HarmonyInstance.PatchAll(type);
+                }
+                catch (Exception e)
+                {
+                    _errorOccured = true;
+                    LoggerInstance.Error($"Exception while attempting to apply {type.Name}: {e}");
+                }
+            }
+        }
+
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
+            ConsoleManager.OnSceneInit();
+
             if (sceneName == "MainMenuScene") // Main Menu
             {
-                ConsoleManager.MainMenuInit();
                 ModSettingsManager.MainMenuInit();
             }
             else if (sceneName == "LobbyScene") // Lobby awaiting Start

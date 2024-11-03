@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_SettingsTab
     {
         private static List<MelonPreferences_Category> _categoryCache = new();

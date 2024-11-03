@@ -3,6 +3,7 @@ using Il2Cpp;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_VersionCheck
     {
         [HarmonyPrefix]

@@ -3,6 +3,7 @@ using Il2CppMirror;
 
 namespace DDSS_ModHelper.Patches
 {
+    [HarmonyPatch]
     internal class Patch_NetworkIdentity
     {
         [HarmonyPostfix]
