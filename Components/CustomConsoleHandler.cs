@@ -123,7 +123,8 @@ namespace DDSS_ModHelper.Components
             }
 
             // Check Command Execution Keybind
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)
+                || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 // Execute Command
                 try
