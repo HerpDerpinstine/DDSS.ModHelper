@@ -19,6 +19,9 @@ namespace DDSS_ModHelper.Settings.Internal
             SettingsTab[] comps = Resources.FindObjectsOfTypeAll<SettingsTab>();
             foreach (SettingsTab comp in comps)
             {
+                if (comp.gameObject.name != "SettingsTab")
+                    continue;
+
                 // Clone it for Mod Settings
                 GameObject _settingsTabObj = UnityEngine.Object.Instantiate(comp.gameObject, comp.transform.parent);
                 tab = _settingsTabObj.GetComponent<SettingsTab>();
