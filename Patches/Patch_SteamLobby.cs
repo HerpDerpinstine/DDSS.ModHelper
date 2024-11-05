@@ -21,7 +21,7 @@ namespace DDSS_ModHelper.Patches
 
             // Apply Custom Lobby Data
             SteamMatchmaking.SetLobbyData(lobbySteamId, "VERSION", Application.version);
-            SteamMatchmaking.SetLobbyData(lobbySteamId, "MODS", ModFilterHandler.GenerateModRequirementList());
+            SteamMatchmaking.SetLobbyData(lobbySteamId, "REQUIREMENTS", RequirementFilterHandler.Generate());
         }
 
         [HarmonyPrefix]
@@ -66,9 +66,9 @@ namespace DDSS_ModHelper.Patches
                 return false;
             }
 
-            // Get Mod List
-            string modsJson = SteamMatchmaking.GetLobbyData(__0, "MODS");
-            if (string.IsNullOrEmpty(modsJson))
+            // Get Requirements List
+            string requirementsJson = SteamMatchmaking.GetLobbyData(__0, "REQUIREMENTS");
+            if (string.IsNullOrEmpty(requirementsJson))
             {
                 // Disconnect
                 ErrorDisconnect(__instance,
@@ -80,15 +80,15 @@ namespace DDSS_ModHelper.Patches
             }
 
             // Check Mod List
-            ModFilterHandler.ParseModRequirements(modsJson,
-                out List<(ModFilterHandler.SerializedMod, MelonBase)> missingMods,
-                out List<(ModFilterHandler.SerializedMod, MelonBase)> mismatchedMods);
+            RequirementFilterHandler.Parse(requirementsJson,
+                out List<(RequirementFilterHandler.SerializedRequirement, MelonBase)> missingMods,
+                out List<(RequirementFilterHandler.SerializedRequirement, MelonBase)> mismatchedMods);
             if ((missingMods.Count > 0) || (mismatchedMods.Count > 0))
             {
                 // Disconnect
                 ErrorDisconnect(__instance,
                     "Dependencies Mismatch",
-                    "You are not running the required Mods for this Lobby!");
+                    "You are not running the required Plugins, Mods, or Custom Content for this Lobby!");
 
                 // Prevent Original
                 return false;

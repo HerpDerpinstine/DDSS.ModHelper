@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DDSS_ModHelper.Utils
 {
-    public static class ModFilterHandler
+    public static class RequirementFilterHandler
     {
         private static List<MelonBase> _optionalMelons = new();
 
@@ -16,9 +16,9 @@ namespace DDSS_ModHelper.Utils
         }
 
         [Serializable]
-        internal class SerializedMod
+        internal class SerializedRequirement
         {
-            internal SerializedMod(string id,
+            internal SerializedRequirement(string id,
                 string name,
                 string author,
                 string version)
@@ -35,48 +35,54 @@ namespace DDSS_ModHelper.Utils
             internal string Version;
         }
 
-        internal static string GenerateModRequirementList()
+        internal static string Generate()
         {
-            List<SerializedMod> serializedMods = new();
+            List<SerializedRequirement> serializedRequirements = new();
 
+            // Add Plugins
             foreach (var plugin in MelonPlugin.RegisteredMelons)
                 if (!_optionalMelons.Contains(plugin))
-                    serializedMods.Add(new(string.IsNullOrEmpty(plugin.ID)
+                    serializedRequirements.Add(new(string.IsNullOrEmpty(plugin.ID)
                         ? plugin.Info.Name : plugin.ID,
                         plugin.Info.Name,
                         plugin.Info.Author,
                         plugin.Info.Version));
 
+            // Add Mods
             foreach (var mod in MelonMod.RegisteredMelons)
                 if (!_optionalMelons.Contains(mod))
-                    serializedMods.Add(new(string.IsNullOrEmpty(mod.ID)
+                    serializedRequirements.Add(new(string.IsNullOrEmpty(mod.ID)
                         ? mod.Info.Name : mod.ID,
                         mod.Info.Name,
                         mod.Info.Author,
                         mod.Info.Version));
 
-            return JsonConvert.SerializeObject(serializedMods);
+            // Callback
+
+            return JsonConvert.SerializeObject(serializedRequirements);
         }
 
-        internal static void ParseModRequirements(string json,
-            out List<(SerializedMod, MelonBase)> missingMods,
-            out List<(SerializedMod, MelonBase)> mismatchedMods)
+        internal static void Parse(string json,
+            out List<(SerializedRequirement, MelonBase)> missingMods,
+            out List<(SerializedRequirement, MelonBase)> mismatchedMods)
         {
-            List<SerializedMod> serializedMods = JsonConvert.DeserializeObject<List<SerializedMod>>(json);
+            List<SerializedRequirement> serializedRequirements = JsonConvert.DeserializeObject<List<SerializedRequirement>>(json);
 
             missingMods = new();
             mismatchedMods = new();
 
-            foreach (SerializedMod mod in serializedMods)
+            foreach (SerializedRequirement requirement in serializedRequirements)
             {
-                MelonBase melonFound = MelonBase.FindMelon(mod.Name, mod.Author);
+                MelonBase melonFound = MelonBase.FindMelon(requirement.Name, requirement.Author);
                 if (melonFound == null)
                 {
-                    missingMods.Add((mod, null));
+                    // Callback
+
+                    missingMods.Add((requirement, null));
                     continue;
                 }
-                if (melonFound.Info.Version != mod.Version)
-                    mismatchedMods.Add((mod, melonFound));
+                if (melonFound.Info.Version != requirement.Version)
+                    mismatchedMods.Add((requirement, melonFound));
             }
         }
     }
