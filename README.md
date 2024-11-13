@@ -3,6 +3,8 @@ Custom Modding API for [Dale & Dawson Stationery Supplies](https://store.steampo
 
 - This allows for Modded experiences and improves general gameplay.
 
+* Discord: https://discord.gg/JDw423Wskf
+
 | Features |
 | - |
 | Extendable API |
