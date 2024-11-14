@@ -1,5 +1,4 @@
-﻿using DDSS_ModHelper.Utils;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Il2Cpp;
 using Il2CppGameManagement.StateMachine;
 using Il2CppMirror;
@@ -7,8 +6,6 @@ using Il2CppObjects.Scripts;
 using Il2CppPlayer;
 using Il2CppPlayer.Lobby;
 using Il2CppPlayer.Tasks;
-using Il2CppUMUI;
-using System.Collections;
 using UnityEngine;
 
 namespace DDSS_ModHelper.Patches
