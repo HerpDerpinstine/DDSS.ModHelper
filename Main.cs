@@ -4,6 +4,7 @@ using DDSS_ModHelper.Patches;
 using DDSS_ModHelper.Settings;
 using DDSS_ModHelper.Utils;
 using HarmonyLib;
+using Il2CppMirror;
 using MelonLoader;
 using System;
 using System.Reflection;
@@ -33,6 +34,10 @@ namespace DDSS_ModHelper
             // Create Default Commands
             ConsoleManager.AddCommand<HelpCommand>();
             ConsoleManager.AddCommand<ClearCommand>();
+			
+            // Prevent Exceptions from causing Disconnects
+            NetworkServer.exceptionsDisconnect = false;
+            NetworkClient.exceptionsDisconnect = false;
 
             // Log Success
             _logger.Msg("Initialized!");

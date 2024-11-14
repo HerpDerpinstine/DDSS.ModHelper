@@ -13,7 +13,6 @@ Custom Modding API for [Dale & Dawson Stationery Supplies](https://store.steampo
 | Developer Console |
 | Advanced Game Rules |
 | 100 Max Players |
-| Intro Skip |
 
 ---
 
