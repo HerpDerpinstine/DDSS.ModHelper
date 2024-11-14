@@ -6,7 +6,6 @@ namespace DDSS_ModHelper.Utils
     internal static class ConfigHandler
     {
         private static MelonPreferences_Category _prefs_Category;
-        internal static MelonPreferences_Entry<bool> _prefs_SkipIntro;
         internal static MelonPreferences_Entry<AlternateStyleHandler.eLogoStyle> _prefs_MenuLogoStyle;
         internal static MelonPreferences_Entry<AlternateStyleHandler.eBackgroundStyle> _prefs_MenuBackgroundStyle;
         internal static MelonPreferences_Entry<AlternateStyleHandler.eBackgroundStyle> _prefs_LobbyBackgroundStyle;
@@ -19,11 +18,6 @@ namespace DDSS_ModHelper.Utils
             _prefs_Category = MelonPreferences.CreateCategory("ModHelper", "Mod Helper");
 
             // Create Preferences Entries
-            _prefs_SkipIntro = CreatePref("SkipIntro",
-                "Skip Intro",
-                "Skips the Intro when a Match starts",
-                false);
-
             _prefs_MenuLogoStyle = CreatePref("MenuLogoStyle",
                 "Menu Logo Style",
                 "Sets the Style of the Game Logo on the Main Menu",
