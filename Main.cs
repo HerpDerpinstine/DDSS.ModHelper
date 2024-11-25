@@ -1,7 +1,5 @@
 ﻿using DDSS_ModHelper.Components;
 using DDSS_ModHelper.Console;
-using DDSS_ModHelper.Patches;
-using DDSS_ModHelper.Settings;
 using DDSS_ModHelper.Utils;
 using HarmonyLib;
 using Il2CppMirror;
@@ -15,6 +13,7 @@ namespace DDSS_ModHelper
     {
         internal static MelonLogger.Instance _logger;
         internal static bool _errorOccured;
+        internal static bool _isBindingKey;
 
         public override void OnInitializeMelon()
         {
@@ -71,32 +70,6 @@ namespace DDSS_ModHelper
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             ConsoleManager.OnSceneInit();
-
-            if (sceneName == "MainMenuScene") // Main Menu
-            {
-                ModSettingsManager.MainMenuInit();
-            }
-            else if (sceneName == "LobbyScene") // Lobby awaiting Start
-            {
-
-            }
-            else // In-Game
-            {
-                ModSettingsManager.GameInit();
-            }
-        }
-
-        private void ApplyPatch<T>()
-        {
-            Type type = typeof(T);
-            try
-            {
-                HarmonyInstance.PatchAll(type);
-            }
-            catch (Exception e)
-            {
-                LoggerInstance.Error($"Exception while attempting to apply {type.Name}: {e}");
-            }
         }
     }   
 }

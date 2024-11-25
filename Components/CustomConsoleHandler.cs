@@ -1,5 +1,4 @@
 ﻿using DDSS_ModHelper.Console;
-using DDSS_ModHelper.Settings;
 using DDSS_ModHelper.Utils;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppUI.Console;
@@ -56,7 +55,7 @@ namespace DDSS_ModHelper.Components
             // Check Toggle and Keybind
             if (ConfigHandler._prefs_DevConsole.Value)
             {
-                if ((ModSettingsManager._rebindCoroutine == null)
+                if (!MelonMain._isBindingKey
                     && Input.GetKeyDown(ConfigHandler._prefs_DevConsoleKeybind.Value))
                 {
                     ConsoleController.instance.consolePanel.SetActive(!ConsoleController.instance.consolePanel.activeSelf);
