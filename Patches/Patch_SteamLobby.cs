@@ -21,7 +21,7 @@ namespace DDSS_ModHelper.Patches
 
             // Apply Custom Lobby Data
             SteamMatchmaking.SetLobbyData(lobbySteamId, "VERSION", Application.version);
-            SteamMatchmaking.SetLobbyData(lobbySteamId, "REQUIREMENTS", RequirementFilterHandler.Generate());
+            SteamMatchmaking.SetLobbyData(lobbySteamId, "REQUIREMENTS", RequirementFilter.Generate());
         }
 
         [HarmonyPrefix]
@@ -80,9 +80,9 @@ namespace DDSS_ModHelper.Patches
             }
 
             // Check Mod List
-            RequirementFilterHandler.Parse(requirementsJson,
-                out List<RequirementFilterHandler.SerializedRequirement> missingMods,
-                out List<RequirementFilterHandler.SerializedRequirement> mismatchedMods);
+            RequirementFilter.Parse(requirementsJson,
+                out List<RequirementFilter.SerializedRequirement> missingMods,
+                out List<RequirementFilter.SerializedRequirement> mismatchedMods);
             if ((missingMods.Count > 0) || (mismatchedMods.Count > 0))
             {
                 // Disconnect

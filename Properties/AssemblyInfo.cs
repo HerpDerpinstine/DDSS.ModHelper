@@ -15,6 +15,5 @@ using MelonLoader;
     DDSS_ModHelper.Properties.BuildInfo.Author,
     DDSS_ModHelper.Properties.BuildInfo.DownloadLink)]
 [assembly: MelonGame("StripedPandaStudios", "DDSS")]
-[assembly: MelonPriority(int.MinValue)]
 [assembly: VerifyLoaderVersion("0.6.5", true)]
 [assembly: HarmonyDontPatchAll]

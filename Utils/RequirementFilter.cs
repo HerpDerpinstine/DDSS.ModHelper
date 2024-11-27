@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DDSS_ModHelper.Utils
 {
-    public static class RequirementFilterHandler
+    public static class RequirementFilter
     {
         private static List<MelonBase> _optionalMelons = new();
         private static Dictionary<string, SerializedRequirement> _additionalRequirements = new();
