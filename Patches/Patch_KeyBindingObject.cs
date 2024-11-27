@@ -8,7 +8,6 @@ namespace DDSS_ModHelper.Patches
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(KeyBindingObject), nameof(KeyBindingObject.SetKeyBind))]
-        [HarmonyPriority(-1)]
         private static void SetKeyBind_Prefix(KeyBindingObject __instance)
         {
             MelonMain._isBindingKey = false;
@@ -16,7 +15,6 @@ namespace DDSS_ModHelper.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(KeyBindingObject), nameof(KeyBindingObject.RefreshKeyBindText))]
-        [HarmonyPriority(-1)]
         private static void RefreshKeyBindText_Prefix(KeyBindingObject __instance)
         {
             MelonMain._isBindingKey = false;
@@ -24,7 +22,6 @@ namespace DDSS_ModHelper.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(KeyBindingObject), nameof(KeyBindingObject.UpdateKeyBind))]
-        [HarmonyPriority(-1)]
         private static void UpdateKeyBind_Prefix(KeyBindingObject __instance)
         {
             MelonMain._isBindingKey = true;

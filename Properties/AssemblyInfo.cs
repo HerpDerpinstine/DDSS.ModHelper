@@ -17,3 +17,4 @@ using MelonLoader;
 [assembly: MelonGame("StripedPandaStudios", "DDSS")]
 [assembly: VerifyLoaderVersion("0.6.5", true)]
 [assembly: HarmonyDontPatchAll]
+[assembly: MelonPriority(int.MinValue)]
