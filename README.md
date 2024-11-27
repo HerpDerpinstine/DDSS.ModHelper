@@ -1,7 +1,7 @@
 # DDSS.ModHelper
 Custom Modding API for [Dale & Dawson Stationery Supplies](https://store.steampowered.com/app/2920570/Dale__Dawson_Stationery_Supplies/)
 
-- This allows for Modded experiences and improves general gameplay.
+- This allows for additional Modded experiences and improves general gameplay.
 
 * Discord: https://discord.gg/JDw423Wskf
 
@@ -9,7 +9,6 @@ Custom Modding API for [Dale & Dawson Stationery Supplies](https://store.steampo
 | - |
 | Extendable API |
 | Modded Matchmaking Pool |
-| Mod Settings GUI |
 | Developer Console |
 | Advanced Game Rules |
 | 100 Max Players |
